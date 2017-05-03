@@ -1,0 +1,22 @@
+{
+  "name": "shakespeare-plays",
+  "version": "1.0.0",
+  "description": "All of Shakespeare's plays at arrays and objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intersim/shakespeare-plays.git"
+  },
+  "author": "emily.intersimone@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/intersim/shakespeare-plays/issues"
+  },
+  "homepage": "https://github.com/intersim/shakespeare-plays#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0"
+  }
+}
