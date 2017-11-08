@@ -7,22 +7,22 @@ const writeFile = Bluebird.promisify(fs.writeFile);
 
 function addCharactersToOverview (playName) {
   let characters, overview;
-  readFile(`${__dirname}/characters/${playName}-characters.json`)
+  readFile(`${__dirname}/characters/${playName}-characters.json`, "utf8")
   .then(_characters => {
+    console.log("CHARACTERS", _characters);
     characters = JSON.parse(_characters);
-    return readFile(`${__dirname}/plays/${playName}/${playName}_overview.json`)
+    return readFile(`${__dirname}/plays/${playName}/${playName}_overview.json`, "utf8")
   })
   .then(_overview => {
+    console.log("OVERVIEW", _overview.toString());
     overview = JSON.parse(_overview.toString());
     overview.characters = characters;
-    return writeFile(`${__dirname}/plays/${playName}/${playName}_overview.json`, overview);
+    return writeFile(`${__dirname}/plays/${playName}/${playName}_overview.json`, JSON.stringify(overview));
   })
   .then(() => console.log(`Successfully updated overview of ${playName}`))
   .catch(console.error)
 }
 
-addCharactersToOverview('Macbeth');
-
-// listOfPlays.forEach(play => {
-//   addCharactersToOverview(play);
-// });
+listOfPlays.forEach(play => {
+  addCharactersToOverview(play);
+});
