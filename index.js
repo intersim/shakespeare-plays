@@ -16,6 +16,8 @@ const listOfPlays = require('./data/toc.json')
   }
 */
 
+const allPlays = {};
+
 function makePlayObject (playName) {
   const playObj = {};
   const basePath = `./data/plays/${playName}`
@@ -31,7 +33,11 @@ function makePlayObject (playName) {
     playObj[`act_${actNum}`] = {};
 
     sceneNums.forEach(sceneNum => {
-      playObj[`act_${actNum}`][`scene_${sceneNum}`] = require(`${basePath}/act_${actNum}/scene_${sceneNum}.json`);
+      try {
+        playObj[`act_${actNum}`][`scene_${sceneNum}`] = require(`${basePath}/act_${actNum}/scene_${sceneNum}.json`);
+      } catch(err) {
+        console.log("Something went wrong:", err);
+      }
     });
   })
 
@@ -40,8 +46,10 @@ function makePlayObject (playName) {
 
 makePlayObject('Macbeth');
 
-listOfPlays.forEach(play => {
-  
+listOfPlays.forEach(playName => {
+  const playObj = makePlayObject(playName);
+
+  allPlays[playName] = playObj;
 });
 
-module.exports = {};
+module.exports = allPlays;
